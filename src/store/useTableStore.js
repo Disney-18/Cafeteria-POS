@@ -62,6 +62,16 @@ export const useTableStore = create(
 
       resetTables: () => set({ tables: createDefaultTables() })
     }),
-    { name: 'pos-tables' }
+    {
+      name: 'pos-tables',
+      onRehydrateStorage: () => (state) => {
+        if (
+          state &&
+          (!Array.isArray(state.tables) || state.tables.length !== 12)
+        ) {
+          state.tables = createDefaultTables();
+        }
+      }
+    }
   )
 );
