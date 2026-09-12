@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 export function formatDateTime(date) {
-  return format(new Date(date), "dd/MM/yyyy HH:mm", { locale: es });
+  return format(new Date(date), 'dd/MM/yyyy HH:mm', { locale: es });
 }
 
 export function formatTime(date) {
