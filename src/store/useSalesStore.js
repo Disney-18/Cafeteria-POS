@@ -26,6 +26,13 @@ export const useSalesStore = create(
 
       clearSales: () => set({ sales: [] })
     }),
-    { name: 'pos-sales' }
+    {
+      name: 'pos-sales',
+      onRehydrateStorage: () => (state) => {
+        if (state && !Array.isArray(state.sales)) {
+          state.sales = [];
+        }
+      }
+    }
   )
 );
