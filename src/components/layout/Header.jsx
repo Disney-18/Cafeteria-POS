@@ -1,7 +1,8 @@
 import { useConfigStore } from '../../store/useConfigStore';
 
 export default function Header({ title }) {
-  const nombre = useConfigStore((s) => s.negocio.nombre);
+  const negocio = useConfigStore((s) => s.negocio);
+  const nombre = negocio?.nombre || 'Mi Cafetería';
 
   return (
     <header className="sticky top-0 z-30 border-b border-coffee-100 bg-white/95 px-4 py-3 backdrop-blur">
