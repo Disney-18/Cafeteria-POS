@@ -8,6 +8,13 @@ export const useOnboardingStore = create(
       completar: () => set({ visto: true }),
       reset: () => set({ visto: false })
     }),
-    { name: 'pos-onboarding' }
+    {
+      name: 'pos-onboarding',
+      onRehydrateStorage: () => (state) => {
+        if (state && typeof state.visto !== 'boolean') {
+          state.visto = false;
+        }
+      }
+    }
   )
 );
