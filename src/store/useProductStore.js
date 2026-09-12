@@ -39,6 +39,13 @@ export const useProductStore = create(
 
       resetProducts: () => set({ products: DEFAULT_PRODUCTS })
     }),
-    { name: 'pos-products' }
+    {
+      name: 'pos-products',
+      onRehydrateStorage: () => (state) => {
+        if (state && (!Array.isArray(state.products) || state.products.length === 0)) {
+          state.products = DEFAULT_PRODUCTS;
+        }
+      }
+    }
   )
 );
