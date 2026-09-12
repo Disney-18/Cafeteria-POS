@@ -52,9 +52,7 @@ export const useCartStore = create(
       decrementItem: (id) =>
         set((s) => ({
           items: s.items
-            .map((i) =>
-              i.id === id ? { ...i, cantidad: i.cantidad - 1 } : i
-            )
+            .map((i) => (i.id === id ? { ...i, cantidad: i.cantidad - 1 } : i))
             .filter((i) => i.cantidad > 0)
         })),
 
@@ -65,6 +63,13 @@ export const useCartStore = create(
 
       getCount: () => get().items.reduce((sum, i) => sum + i.cantidad, 0)
     }),
-    { name: 'pos-cart' }
+    {
+      name: 'pos-cart',
+      onRehydrateStorage: () => (state) => {
+        if (state && !Array.isArray(state.items)) {
+          state.items = [];
+        }
+      }
+    }
   )
 );
